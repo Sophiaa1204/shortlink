@@ -1,9 +1,9 @@
 package com.sophia.shortlink.admin.controller;
 
-import com.sophia.shortlink.admin.common.convention.exception.ClientException;
+import cn.hutool.core.bean.BeanUtil;
 import com.sophia.shortlink.admin.common.convention.result.Result;
 import com.sophia.shortlink.admin.common.convention.result.Results;
-import com.sophia.shortlink.admin.common.enums.UserErrorCodeEnum;
+import com.sophia.shortlink.admin.dto.resp.UserActualRespDTO;
 import com.sophia.shortlink.admin.dto.resp.UserRespDTO;
 import com.sophia.shortlink.admin.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -27,12 +27,12 @@ public class UserController {
      */
     @GetMapping("/api/shortlink/v1/user/{username}")
     public Result<UserRespDTO> getUserByUsername(@PathVariable("username") String username) {
-        UserRespDTO result = userService.getUserByUsername(username);
-        if (result == null) {
-            throw new ClientException(UserErrorCodeEnum.USER_NULL);
-        } else {
-            return Results.success(result);
-        }
+        return Results.success(userService.getUserByUsername(username));
+    }
+
+    @GetMapping("/api/shortlink/v1/actual/user/{username}")
+    public Result<UserActualRespDTO> getActualUserByUsername(@PathVariable("username") String username) {
+        return Results.success(BeanUtil.toBean(userService.getUserByUsername(username), UserActualRespDTO.class));
     }
 
 }
