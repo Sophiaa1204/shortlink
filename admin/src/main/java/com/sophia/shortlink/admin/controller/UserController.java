@@ -1,5 +1,6 @@
 package com.sophia.shortlink.admin.controller;
 
+import com.sophia.shortlink.admin.common.convention.exception.ClientException;
 import com.sophia.shortlink.admin.common.convention.result.Result;
 import com.sophia.shortlink.admin.common.convention.result.Results;
 import com.sophia.shortlink.admin.common.enums.UserErrorCodeEnum;
@@ -28,7 +29,7 @@ public class UserController {
     public Result<UserRespDTO> getUserByUsername(@PathVariable("username") String username) {
         UserRespDTO result = userService.getUserByUsername(username);
         if (result == null) {
-            return new Result<UserRespDTO>().setCode(UserErrorCodeEnum.USER_NULL.code()).setMessage(UserErrorCodeEnum.USER_NULL.message());
+            throw new ClientException(UserErrorCodeEnum.USER_NULL);
         } else {
             return Results.success(result);
         }
