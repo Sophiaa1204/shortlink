@@ -19,3 +19,8 @@
 * ![img.png](img.png)
 * ![img_1.png](img_1.png)
 * 缓存穿透：将数据库已有的用户名全部放到缓存里。布隆过滤器是一种数据结构，用于快速判断一个元素是否存在于一个集合中。（Redisson)
+* 分库/分表/分库分表
+* ![img_2.png](img_2.png)
+* ![img_3.png](img_3.png)
+* ![img_4.png](img_4.png)
+* ![img_5.png](img_5.png)
