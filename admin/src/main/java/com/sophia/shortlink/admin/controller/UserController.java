@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.sophia.shortlink.admin.common.convention.result.Result;
 import com.sophia.shortlink.admin.common.convention.result.Results;
 import com.sophia.shortlink.admin.dto.req.UserRegisterReqDTO;
+import com.sophia.shortlink.admin.dto.req.UserUpdateReqDTO;
 import com.sophia.shortlink.admin.dto.resp.UserActualRespDTO;
 import com.sophia.shortlink.admin.dto.resp.UserRespDTO;
 import com.sophia.shortlink.admin.service.UserService;
@@ -48,5 +49,13 @@ public class UserController {
         userService.register(requestParam);
         return Results.success();
     }
+
+    @PutMapping("/api/short-link/v1/user")
+    public Result<Void> update(@RequestBody UserUpdateReqDTO requestParam) {
+        userService.update(requestParam);
+        return Results.success();
+    }
+
+    public Result<String>
 
 }
