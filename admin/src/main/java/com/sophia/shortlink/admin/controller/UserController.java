@@ -3,9 +3,11 @@ package com.sophia.shortlink.admin.controller;
 import cn.hutool.core.bean.BeanUtil;
 import com.sophia.shortlink.admin.common.convention.result.Result;
 import com.sophia.shortlink.admin.common.convention.result.Results;
+import com.sophia.shortlink.admin.dto.req.UserLoginReqDTO;
 import com.sophia.shortlink.admin.dto.req.UserRegisterReqDTO;
 import com.sophia.shortlink.admin.dto.req.UserUpdateReqDTO;
 import com.sophia.shortlink.admin.dto.resp.UserActualRespDTO;
+import com.sophia.shortlink.admin.dto.resp.UserLoginRespDTO;
 import com.sophia.shortlink.admin.dto.resp.UserRespDTO;
 import com.sophia.shortlink.admin.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -56,6 +58,22 @@ public class UserController {
         return Results.success();
     }
 
-    public Result<String>
+    /**
+     * 用户登录请求
+     */
+    @PostMapping("/api/short-link/v1/user/login")
+    public Result<UserLoginRespDTO> login(@RequestBody UserLoginReqDTO requestParam) {
+        return Results.success(userService.login(requestParam));
+    }
+
+    /**
+     * 检查用户是否登录
+     * @param token
+     * @return
+     */
+    @GetMapping("api/short-link/v1/user/check-login")
+    public Result<Boolean> checkLogin(@RequestParam("username") String username, @RequestParam("token") String token) {
+        return Results.success(userService.checkLogin(username, token));
+    }
 
 }
